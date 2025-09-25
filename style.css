@@ -1,0 +1,111 @@
+*{
+    padding: 0;
+    margin: 0;
+    /* box-sizing: border-box; ensures everything fits in their containers well. Not necessarily for todays wesbsites */
+}
+
+/* styling the whole page */
+body{
+    background-image: url(./images/theatre.jpeg); /*adds bcg image*/
+    background-repeat: none; /*ensures there is no repetition of image in bcg*/
+    background-size: cover; /*ensures bcg image fills whole body page*/
+    color: #444; /*ensures txt color to somewhat black*/
+    letter-spacing: 4px; /*letters are spaced by a 4pixel distance*/
+
+}
+
+/* styling the main section */
+#wrapper{
+    background-color: #eee; /*fills entire spaces of wrapper element with the defined color*/
+    max-width: 960px;
+    border: 3px solid #444;
+    margin: 40px auto; /*centers wrapper horizontally*/
+    padding: 20px; /*add spaces inside borders of our wrapper elment of 20px*/
+    border-radius: 6px; /*defines the intensity of curves in the edges of the borders*/ 
+}
+
+/* styling the headers */
+#page-banner{
+    background-color: #df5b3f; /*fille entire spaces of the page-banner with the specified color*/
+    padding: 10px 0; /*add spacing of 10px to the  inside top and bottom margins only*/
+    text-align: center; /*aligns the item at the center (in our case the header) horizontally*/
+    color: white; /*gives a white color to the header1, the item inside the header*/
+}
+
+/* styling the movie section and add-movie form*/
+#movie-list, #add-movie{
+    margin: 30px
+}
+
+/* styling the unordered list */
+#movie-list ul{
+    list-style: none;
+}
+
+#movie-list ul li{
+    display: flex; /*align items horizontally*/
+    /* note that justify-content cant work without display:flex */
+    justify-content: space-between; /*Aligns first and last items to edges with equal spacing between all items.*/
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd; /*adds a line at the bottom of each item*/
+}
+
+/* adding hovering effect to items in the list */
+#movie-list ul li:hover{
+    border-left: #9361bf 2px solid; /*Shows a vertical line to the left on hover.*/
+    background-color: #f4f4f4; /*colors changes to the specified one on hovering*/
+
+}
+
+#movie-list ul li .edit {
+  margin-left: auto;   
+  margin-right: 10px;  /*push edit buton to left by adding spaces on its right*/
+}
+
+/* styling the delete element  */
+.edit, .delete{
+    background-color: #df5b3f;
+    color:#fff ;
+    padding: 5px 10px;
+    border-radius:10px ;
+    cursor: pointer; 
+    
+}
+
+/* add hover effects on the delete item  */
+.edit:hover, .delete:hover{
+    background-color: maroon;
+}
+
+
+/* styling the add movie form  */
+#add-movie{
+    /* border: 2px solid black; */
+    width: 400px; /*restricts width of item to occupy 400 pixels and not the whole page*/
+     margin: 0 auto; /*aligns items in add-movie container horizontally */
+}
+
+/* styling the imput item  */
+#add-movie input{
+    margin: 20px 0; /*adds verticall spacing to the outside borders input item*/
+    padding: 10px; /*add spacing all around the inside borders of the input item*/
+    border: 1px solid #ccc;
+    width: 300px;
+    border-radius: 4px;
+}
+
+/* styling the button item */
+#add-movie button{
+    background-color: green;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* hovering effect on the button  */
+#add-movie button:hover{
+    background-color: darkgreen;
+}
