@@ -28,13 +28,13 @@ list.addEventListener("click", function(e) {
     const target = e.target.closest('span'); // ensure we get the span even if icon was clicked
     if (!target) return;
 
-    // DELETE
+    //delete
     if (target.classList.contains('delete')) {
         const li = target.parentElement;
         li.remove();
     }
 
-    // EDIT
+    //edit
     if (target.classList.contains('edit')) {
         const li = target.parentElement;
         const existingInput = li.querySelector('input');
@@ -52,11 +52,11 @@ list.addEventListener("click", function(e) {
             li.insertBefore(input, nameSpan);
             li.removeChild(nameSpan);
 
-            // change icon to "save"
+            // change edit icon to "save" icon
             target.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
 
         } else {
-            // Save mode
+            //save after edit
             const newSpan = document.createElement('span');
             newSpan.textContent = existingInput.value || "Untitled Movie";
             newSpan.className = 'name';
@@ -64,7 +64,7 @@ list.addEventListener("click", function(e) {
             li.insertBefore(newSpan, existingInput);
             li.removeChild(existingInput);
 
-            // change icon back to "edit"
+            // change icon back to "edit" after saving
             target.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
         }
     }

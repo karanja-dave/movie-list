@@ -6,7 +6,7 @@
 
 /* styling the whole page */
 body{
-    background-image: url(./images/theatre.jpeg); /*adds bcg image*/
+    background-image: url(./images/bcg-image.jpg); /*adds bcg image*/
     background-repeat: none; /*ensures there is no repetition of image in bcg*/
     background-size: cover; /*ensures bcg image fills whole body page*/
     color: #444; /*ensures txt color to somewhat black*/
@@ -16,9 +16,9 @@ body{
 
 /* styling the main section */
 #wrapper{
-    background-color: #eee; /*fills entire spaces of wrapper element with the defined color*/
+    /* background-color: #eee; fills entire spaces of wrapper element with the defined color */
     max-width: 960px;
-    border: 3px solid #444;
+    border: none;
     margin: 40px auto; /*centers wrapper horizontally*/
     padding: 20px; /*add spaces inside borders of our wrapper elment of 20px*/
     border-radius: 6px; /*defines the intensity of curves in the edges of the borders*/ 
@@ -26,7 +26,7 @@ body{
 
 /* styling the headers */
 #page-banner{
-    background-color: #df5b3f; /*fille entire spaces of the page-banner with the specified color*/
+    /* background-color: #df5b3f; fille entire spaces of the page-banner with the specified color */
     padding: 10px 0; /*add spacing of 10px to the  inside top and bottom margins only*/
     text-align: center; /*aligns the item at the center (in our case the header) horizontally*/
     color: white; /*gives a white color to the header1, the item inside the header*/
@@ -47,6 +47,7 @@ body{
     /* note that justify-content cant work without display:flex */
     justify-content: space-between; /*Aligns first and last items to edges with equal spacing between all items.*/
     padding: 10px 0;
+    color: white;
     border-bottom: 1px solid #ddd; /*adds a line at the bottom of each item*/
 }
 
@@ -54,6 +55,7 @@ body{
 #movie-list ul li:hover{
     border-left: #9361bf 2px solid; /*Shows a vertical line to the left on hover.*/
     background-color: #f4f4f4; /*colors changes to the specified one on hovering*/
+    color: blue;
 
 }
 
