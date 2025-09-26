@@ -64,8 +64,8 @@ body{
 
 /* styling the delete element  */
 .edit, .delete{
-    background-color: #df5b3f;
-    color:#fff ;
+    /* background-color: #df5b3f; */
+    /* color:#fff ; */
     padding: 5px 10px;
     border-radius:10px ;
     cursor: pointer; 

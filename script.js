@@ -23,12 +23,44 @@ document.addEventListener('DOMContentLoaded',function(){
 
     // deleting movies
     // let JS click on the delete button
-    list.addEventListener("click", function(e){
-        if(e.target.className='delete'){
-            const li=e.target.parentElement;
-            li.parentNode.removeChild(li)
-        }
-    })
+    // deleting OR editing movies
+list.addEventListener("click", function(e){
+    if (e.target.className === 'delete') {
+        const li = e.target.parentElement;
+        li.parentNode.removeChild(li);
+    }
+
+    if (e.target.classList.contains('edit')) {
+    const li = e.target.parentElement;
+    const nameSpan = li.querySelector('.name');
+
+    if (e.target.textContent === 'Edit') {
+        // Switch to edit mode
+        const currentText = nameSpan.textContent;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = currentText;
+        input.className = 'edit-input';
+
+        li.insertBefore(input, nameSpan);
+        li.removeChild(nameSpan);
+
+        e.target.textContent = 'Save'; // change button text
+    } else {
+        // Save mode
+        const input = li.querySelector('.edit-input');
+        const newSpan = document.createElement('span');
+        newSpan.textContent = input.value || "Untitled Movie";
+        newSpan.className = 'name';
+
+        li.insertBefore(newSpan, input);
+        li.removeChild(input);
+
+        e.target.textContent = 'Edit'; // change button back
+    }
+}
+});
+
 
 
     // adding movies
@@ -50,19 +82,26 @@ document.addEventListener('DOMContentLoaded',function(){
         // creating elements that store added movies, the unordered list 
         const li=document.createElement('li') //using JS to create an element
         const movieName=document.createElement('span') //tell JS to create a span for movie name
+        const editBtn = document.createElement('span');
+
         const deleteBtn=document.createElement('span') //tells JS to create a span for the delete button
 
 
         // adding content in code block 3
         movieName.textContent=value
+        editBtn.textContent = 'Edit';
+
         deleteBtn.textContent='Delete'
 
         // adding classes to the spans created
         movieName.classList.add('name')
+        editBtn.classList.add('edit');
+
         deleteBtn.classList.add('delete')
 
         // appending spans to a list
         li.appendChild(movieName)
+        li.append(editBtn)
         li.appendChild(deleteBtn)
 
         // appending new list to the unordered list (append to DOM)
