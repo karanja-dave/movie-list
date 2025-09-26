@@ -92,7 +92,6 @@ list.addEventListener("click", function(e) {
         const li=document.createElement('li') //using JS to create an element
         const movieName=document.createElement('span') //tell JS to create a span for movie name
         const editBtn = document.createElement('span');
-
         const deleteBtn=document.createElement('span') //tells JS to create a span for the delete button
 
 

@@ -6,7 +6,7 @@
 
 /* styling the whole page */
 body{
-    background-image: url(./images/bcg-image.jpg); /*adds bcg image*/
+    background-image: url(./images/apok-image.jpg); /*adds bcg image*/
     background-repeat: none; /*ensures there is no repetition of image in bcg*/
     background-size: cover; /*ensures bcg image fills whole body page*/
     color: #444; /*ensures txt color to somewhat black*/
@@ -32,6 +32,10 @@ body{
     color: white; /*gives a white color to the header1, the item inside the header*/
 }
 
+.title{
+    border-bottom: 5px solid black;
+}
+
 /* styling the movie section and add-movie form*/
 #movie-list, #add-movie{
     margin: 30px
@@ -47,7 +51,7 @@ body{
     /* note that justify-content cant work without display:flex */
     justify-content: space-between; /*Aligns first and last items to edges with equal spacing between all items.*/
     padding: 10px 0;
-    color: white;
+    color:  white;
     border-bottom: 1px solid #ddd; /*adds a line at the bottom of each item*/
 }
 
