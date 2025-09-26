@@ -24,41 +24,50 @@ document.addEventListener('DOMContentLoaded',function(){
     // deleting movies
     // let JS click on the delete button
     // deleting OR editing movies
-list.addEventListener("click", function(e){
-    if (e.target.className === 'delete') {
-        const li = e.target.parentElement;
-        li.parentNode.removeChild(li);
+list.addEventListener("click", function(e) {
+    const target = e.target.closest('span'); // ensure we get the span even if icon was clicked
+    if (!target) return;
+
+    // DELETE
+    if (target.classList.contains('delete')) {
+        const li = target.parentElement;
+        li.remove();
     }
 
-    if (e.target.classList.contains('edit')) {
-    const li = e.target.parentElement;
-    const nameSpan = li.querySelector('.name');
+    // EDIT
+    if (target.classList.contains('edit')) {
+        const li = target.parentElement;
+        const existingInput = li.querySelector('input');
 
-    if (e.target.textContent === 'Edit') {
-        // Switch to edit mode
-        const currentText = nameSpan.textContent;
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = currentText;
-        input.className = 'edit-input';
+        if (!existingInput) {
+            // Switch to edit mode
+            const nameSpan = li.querySelector('.name');
+            const currentText = nameSpan.textContent;
 
-        li.insertBefore(input, nameSpan);
-        li.removeChild(nameSpan);
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentText;
+            input.className = 'edit-input';
 
-        e.target.textContent = 'Save'; // change button text
-    } else {
-        // Save mode
-        const input = li.querySelector('.edit-input');
-        const newSpan = document.createElement('span');
-        newSpan.textContent = input.value || "Untitled Movie";
-        newSpan.className = 'name';
+            li.insertBefore(input, nameSpan);
+            li.removeChild(nameSpan);
 
-        li.insertBefore(newSpan, input);
-        li.removeChild(input);
+            // change icon to "save"
+            target.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
 
-        e.target.textContent = 'Edit'; // change button back
+        } else {
+            // Save mode
+            const newSpan = document.createElement('span');
+            newSpan.textContent = existingInput.value || "Untitled Movie";
+            newSpan.className = 'name';
+
+            li.insertBefore(newSpan, existingInput);
+            li.removeChild(existingInput);
+
+            // change icon back to "edit"
+            target.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+        }
     }
-}
 });
 
 
@@ -90,18 +99,21 @@ list.addEventListener("click", function(e){
         // adding content in code block 3
         movieName.textContent=value
         editBtn.textContent = 'Edit';
-
         deleteBtn.textContent='Delete'
 
         // adding classes to the spans created
         movieName.classList.add('name')
         editBtn.classList.add('edit');
-
         deleteBtn.classList.add('delete')
+
+        // tell java to use icons instead of names for the edit and delete buttons when adding new movie to list
+        editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
 
         // appending spans to a list
         li.appendChild(movieName)
-        li.append(editBtn)
+        li.appendChild(editBtn)
         li.appendChild(deleteBtn)
 
         // appending new list to the unordered list (append to DOM)
