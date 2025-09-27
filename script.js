@@ -24,81 +24,89 @@ document.addEventListener('DOMContentLoaded',function(){
     // deleting movies
     // let JS click on the delete button
     // deleting OR editing movies
-list.addEventListener("click", function(e) {
-    const target = e.target.closest('span'); // ensure we get the span even if icon was clicked
-    if (!target) return;
+    list.addEventListener("click", function(e) {
+        const target = e.target.closest('span'); // ensure we get the span even if icon was clicked
+        if (!target) return;
 
-    // delete
-    if (target.classList.contains('delete')) {
-        const li = target.parentElement;
+        // delete
+        if (target.classList.contains('delete')) {
+            const li = target.parentElement;
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "This movie will be removed from your watchlist.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#e62429',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                li.remove();
-                Swal.fire(
-                    'Deleted!',
-                    'The movie has been removed.',
-                    'success'
-                );
-            }
-        });
-    }
-
-    // edit
-    if (target.classList.contains('edit')) {
-        const li = target.parentElement;
-        const existingInput = li.querySelector('input');
-
-        if (!existingInput) {
-            // Switch to edit mode
-            const nameSpan = li.querySelector('.name');
-            const currentText = nameSpan.textContent;
-
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = currentText;
-            input.className = 'edit-input';
-
-            li.insertBefore(input, nameSpan);
-            li.removeChild(nameSpan);
-
-            // change edit icon to "save" icon
-            target.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
-            input.focus();
-
-        } else {
-            // save after edit
-            if (existingInput.value.trim() === "") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Movie name cannot be empty!'
-                });
-                return;
-            }
-
-            const newSpan = document.createElement('span');
-            newSpan.textContent = existingInput.value;
-            newSpan.className = 'name';
-
-            li.insertBefore(newSpan, existingInput);
-            li.removeChild(existingInput);
-
-            // change icon back to "edit" after saving
-            target.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+            // delete alert section
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This movie will be removed from your watchlist.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e62429',
+                cancelButtonColor: 'green',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                // movie is deleted after confirmation button is clicked
+                if (result.isConfirmed) {
+                    li.remove();
+                    Swal.fire(
+                        'Deleted!',
+                        'The movie has been removed.',
+                        'success'
+                    );
+                }
+            });
         }
-    }
-});
 
+        // edit
+        if (target.classList.contains('edit')) {
+            const li = target.parentElement;
+            const existingInput = li.querySelector('input');
 
+            if (!existingInput) {
+                // switch to edit mode
+                const nameSpan = li.querySelector('.name');
+                const currentText = nameSpan.textContent;
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = currentText;
+                input.className = 'edit-input';
+
+                li.insertBefore(input, nameSpan);
+                li.removeChild(nameSpan);
+
+                // change edit icon to "save" icon
+                target.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
+                input.focus(); //takes cursor inside text area automatically for edditing
+
+                //save on enter key
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    target.click(); // trigger save logic
+                }
+            });
+
+            } else {
+                // save after edit
+                if (existingInput.value.trim() === "") {
+                    // aleret message when you editted movie list is empty
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Movie name cannot be empty!'
+                    });
+                    return;
+                }
+
+                const newSpan = document.createElement('span');
+                newSpan.textContent = existingInput.value;
+                newSpan.className = 'name';
+
+                li.insertBefore(newSpan, existingInput);
+                li.removeChild(existingInput);
+
+                // change icon back to "edit" after saving
+                target.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+            }
+        }
+    });
 
 
     // adding movies
@@ -134,7 +142,7 @@ list.addEventListener("click", function(e) {
         editBtn.classList.add('edit');
         deleteBtn.classList.add('delete')
 
-        // tell java to use icons instead of names for the edit and delete buttons when adding new movie to list
+        // tell js to use icons instead of names for the edit and delete buttons when adding new movie to list
         editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
         deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
