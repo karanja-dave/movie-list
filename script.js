@@ -28,13 +28,31 @@ list.addEventListener("click", function(e) {
     const target = e.target.closest('span'); // ensure we get the span even if icon was clicked
     if (!target) return;
 
-    //delete
+    // delete
     if (target.classList.contains('delete')) {
         const li = target.parentElement;
-        li.remove();
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This movie will be removed from your watchlist.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e62429',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                li.remove();
+                Swal.fire(
+                    'Deleted!',
+                    'The movie has been removed.',
+                    'success'
+                );
+            }
+        });
     }
 
-    //edit
+    // edit
     if (target.classList.contains('edit')) {
         const li = target.parentElement;
         const existingInput = li.querySelector('input');
@@ -54,11 +72,21 @@ list.addEventListener("click", function(e) {
 
             // change edit icon to "save" icon
             target.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
+            input.focus();
 
         } else {
-            //save after edit
+            // save after edit
+            if (existingInput.value.trim() === "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Movie name cannot be empty!'
+                });
+                return;
+            }
+
             const newSpan = document.createElement('span');
-            newSpan.textContent = existingInput.value || "Untitled Movie";
+            newSpan.textContent = existingInput.value;
             newSpan.className = 'name';
 
             li.insertBefore(newSpan, existingInput);
@@ -69,6 +97,7 @@ list.addEventListener("click", function(e) {
         }
     }
 });
+
 
 
 
