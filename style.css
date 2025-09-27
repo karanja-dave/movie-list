@@ -125,3 +125,16 @@ body::after {
 #add-movie button:hover{
     background-color: darkgreen;
 }
+
+
+/* responsive desigs */
+@media (max-width: 768px) {
+  .movie-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .movie-item button {
+    margin-top: 6px;
+  }
+}
