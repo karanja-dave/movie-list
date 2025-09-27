@@ -119,11 +119,17 @@ document.addEventListener('DOMContentLoaded',function(){
         console.log(value); //for testing purposes-outputed in the console log
 
         //alert user to enter movie name when they click add withou inputing movie
-        if(!value){
-            alert("Please enter movie name") //an alert message pops up to ask user to enter movie name 
+        if (!value) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter a movie name!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
             console.log("Please add a movie name!");
-            return
-        }
+            return;
+}
 
         // creating elements that store added movies, the unordered list 
         const li=document.createElement('li') //using JS to create an element
