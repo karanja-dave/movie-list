@@ -11,7 +11,17 @@ body{
     background-size: cover; /*ensures bcg image fills whole body page*/
     color: #444; /*ensures txt color to somewhat black*/
     letter-spacing: 4px; /*letters are spaced by a 4pixel distance*/
+   
+}
 
+/* reduce background image contrast for better visibility of texts in the list  */
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* cover the whole body */
+  background: rgba(0,0,0,0.4); /* dark semi-transparent overlay */
+  backdrop-filter: contrast(80%); /* reduce only background contrast */
+  z-index: -1;
 }
 
 /* styling the main section */
