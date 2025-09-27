@@ -39,17 +39,19 @@ document.addEventListener('DOMContentLoaded',function(){
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#e62429',
-                cancelButtonColor: 'green',
+                cancelButtonColor: '#14e64cff',
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-                // movie is deleted after confirmation button is clicked
+                // movie is deleted after confirmation button is clicked and succes message displayed
                 if (result.isConfirmed) {
                     li.remove();
-                    Swal.fire(
-                        'Deleted!',
-                        'The movie has been removed.',
-                        'success'
-                    );
+                    Swal.fire({
+                        title:'Deleted!',
+                        text:'The movie has been removed.',
+                        icon:'success',
+                        confirmButtonColor:'#3085d6',
+                        
+                });
                 }
             });
         }
@@ -90,7 +92,9 @@ document.addEventListener('DOMContentLoaded',function(){
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Movie name cannot be empty!'
+                        text: 'Movie name cannot be empty!',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
                     });
                     return;
                 }
