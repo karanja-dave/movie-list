@@ -128,7 +128,7 @@ body::after {
 
 
 /* responsive desigs */
-@media (max-width: 600px) {
+@media (max-width: 1020px) {
   #wrapper {
     margin: 10px;
     padding: 15px;
